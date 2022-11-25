@@ -6,9 +6,12 @@ const metadata = require('reflect-metadata')
 var createError = require("http-errors");
 var express = require("express");
 var cookieParser = require("cookie-parser");
-import * as cors from "cors";
-import { useSocketServer } from "socket-controllers";
-import { Server } from "socket.io";
+// import * as cors from "cors";
+const cors = require("cors")
+const useSocketServer = require("socket-controllers")
+const Server = require("socket.io")
+// import { useSocketServer } from "socket-controllers";
+// import { Server } from "socket.io";
 
 
 var app = express();
@@ -35,13 +38,13 @@ app.use(function (err, req, res, next) {
 
 
 function socketServer(httpServer) {
-  const io = new Server(httpServer, {
+  const io = new Server.Server(httpServer, {
     cors: {
       origin: "*",
     },
   });
 
-  useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
+  useSocketServer.useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
   return io;
 };
 
