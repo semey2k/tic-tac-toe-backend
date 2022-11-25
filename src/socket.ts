@@ -13,6 +13,6 @@ export default (httpServer) => {
   // });
 
   useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
-
+  // console.log(__dirname)
   return io;
 };
