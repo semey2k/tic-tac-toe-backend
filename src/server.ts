@@ -5,7 +5,7 @@ import * as http from "http";
 import socketServer from "./socket";
 
 
-var port = normalizePort(process.env.PORT || "9000");
+var port = process.env.PORT || "9000";
 app.set("port", port);
 
 
@@ -17,22 +17,6 @@ server.on("error", onError);
 server.on("listening", onListening);
 
 const io = socketServer(server);
-
-function normalizePort(val) {
-  var port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-
-    return val;
-  }
-
-  if (port >= 0) {
-
-    return port;
-  }
-
-  return false;
-}
 
 
 function onError(error) {
