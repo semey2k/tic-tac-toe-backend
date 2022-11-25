@@ -5,14 +5,14 @@ import * as http from "http";
 import socketServer from "./socket";
 
 
-var port = process.env.PORT || "9000";
-app.set("port", port);
+const PORT = process.env.PORT || "9000";
+app.set("port", PORT);
 
 
-var server = http.createServer(app);
+const server = http.createServer(app);
 
 
-server.listen(port);
+server.listen(PORT, () =>  console.log(PORT));
 server.on("error", onError);
 server.on("listening", onListening);
 
@@ -24,7 +24,7 @@ function onError(error) {
     throw error;
   }
 
-  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
+  const bind = typeof PORT === "string" ? "Pipe " + PORT : "Port " + PORT;
 
   switch (error.code) {
     case "EACCES":
@@ -41,9 +41,9 @@ function onError(error) {
 }
 
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
+  const addr = server.address();
+  const bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
   debug("Listening on " + bind);
 
-  console.log("Server Running on Port: ", port);
+  console.log("Server Running on Port: ", PORT);
 }
