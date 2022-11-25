@@ -4,7 +4,8 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "node server.ts"
+    "start": "node src/server.ts",
+    "start:dev": "nodemon src/server.ts"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

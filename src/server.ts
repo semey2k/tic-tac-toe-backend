@@ -1,11 +1,52 @@
+
+const debug = require("debug")("socketio-server:server");
+const http = require("http")
 import "reflect-metadata";
-import app from "./app";
-var debug = require("debug")("socketio-server:server");
-import * as http from "http";
-import socketServer from "./socket";
+var createError = require("http-errors");
+var express = require("express");
+var cookieParser = require("cookie-parser");
+import * as cors from "cors";
+import { useSocketServer } from "socket-controllers";
+import { Server } from "socket.io";
 
 
-const PORT = process.env.PORT || "9000";
+var app = express();
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors());
+
+
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+app.use(function (err, req, res, next) {
+
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+
+  res.status(err.status || 500);
+  res.render("error");
+});
+
+
+
+function socketServer(httpServer) {
+  const io = new Server(httpServer, {
+    cors: {
+      origin: "*",
+    },
+  });
+
+  useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
+  return io;
+};
+
+
+
+const PORT = process.env.PORT || 9000;
 app.set("port", PORT);
 
 
