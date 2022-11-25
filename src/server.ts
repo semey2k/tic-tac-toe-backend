@@ -1,7 +1,8 @@
 
 const debug = require("debug")("socketio-server:server");
 const http = require("http")
-import "reflect-metadata";
+const metadata = require('reflect-metadata')
+// import "reflect-metadata"
 var createError = require("http-errors");
 var express = require("express");
 var cookieParser = require("cookie-parser");
