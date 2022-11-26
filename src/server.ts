@@ -44,7 +44,7 @@ function socketServer(httpServer) {
     },
   });
 
-  useSocketServer(io, { controllers: [__dirname + "/api/controllers/*.ts"] });
+  useSocketServer(io, { controllers: [__dirname + "/api/controllers/*"] });
   return io;
 };
 
