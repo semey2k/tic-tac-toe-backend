@@ -1,3 +1,4 @@
+import { Socket, Server } from "socket.io";
 import {
   ConnectedSocket,
   MessageBody,
@@ -5,7 +6,7 @@ import {
   SocketController,
   SocketIO,
 } from "socket-controllers";
-import { Server, Socket } from "socket.io";
+
 
 @SocketController()
 export class GameController {
